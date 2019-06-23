@@ -21,19 +21,20 @@ class BlogPost(models.Model):
 
     def __str__(self):
         """String for representing the Model object."""
-        return f'{self.title} {self.post_date}'
+        return f'{self.title}'
 
 class Blogger(models.Model):
     """Model representing a blogger."""
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
+    bio = models.TextField(max_length=5000, help_text='Type the blogger bio here')
 
     class Meta:
         ordering = ['first_name', 'last_name']
 
-    # def get_absolute_url(self):
-    #     """Returns the url to access a particular author instance."""
-    #     return reverse('blogger-detail', args=[str(self.id)])
+    def get_absolute_url(self):
+        """Returns the url to access a particular author instance."""
+        return reverse('blogger-detail', args=[str(self.id)])
 
     
     def __str__(self):
@@ -42,13 +43,14 @@ class Blogger(models.Model):
 
 class Comment(models.Model):
     """Model representing a blog post."""
-    comment = models.CharField(max_length=200, help_text='Enter a comment here')
+    comment = models.TextField(max_length=200, help_text='Enter a comment here')
     post_date = models.DateTimeField(auto_now_add=True)
+    target_blog_post = models.ForeignKey('BlogPost', on_delete=models.CASCADE, null=True)
     
     class Meta:
         ordering = ['-post_date']
 
     def __str__(self):
         """String for representing the Model object."""
-        return self.comment, self.post_date
+        return f'{self.comment}'
 

@@ -14,7 +14,7 @@ class BloggerAdmin(admin.ModelAdmin):
     
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('comment', 'post_date')
 
 # admin.site.register(BlogPost)
 # admin.site.register(Blogger)

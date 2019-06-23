@@ -3,7 +3,10 @@
 {% block content %}
   <h1>Title: {{ blogpost.title }}</h1>
 
-  <p><strong>Blogger:</strong> <a href="">{{ blogpost.blogger }}</a></p>
+  <p><strong>Blogger:</strong> <a href="{% url 'blogger-detail' blogpost.blogger.pk %}">{{ blogpost.blogger }}</a></p>
+  <!-- <p><strong>Blogger:</strong> <a href="">{{ blogpost.blogger }}</a></p> -->
   <p><strong>Post:</strong> {{ blogpost.post }}</p>
+  <p><strong>Comments:</strong> {{ comment.target_blog_post }}</p>
+
 
 {% endblock %}
