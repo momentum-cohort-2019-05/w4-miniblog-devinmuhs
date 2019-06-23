@@ -2,6 +2,8 @@ from django.db import models
 from django.urls import reverse # Used to generate URLs by reversing the URL patterns
 # import uuid # Required for unique blog instances
 from datetime import date
+from django.contrib.auth.models import User
+from django.conf import settings
 
 
 # Create your models here.
@@ -46,7 +48,8 @@ class Comment(models.Model):
     comment = models.TextField(max_length=200, help_text='Enter a comment here')
     post_date = models.DateTimeField(auto_now_add=True)
     target_blog_post = models.ForeignKey('BlogPost', on_delete=models.CASCADE, null=True)
-    
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, on_delete=models.CASCADE)
+
     class Meta:
         ordering = ['-post_date']
 
