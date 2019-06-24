@@ -7,6 +7,7 @@
   <!-- <p><strong>Blogger:</strong> <a href="">{{ blogpost.blogger }}</a></p> -->
   <p><strong>Post:</strong> {{ blogpost.post }}</p>
   <p><strong>Comments</strong></p>
+  
   {% for comment in blogpost.comment_set.all %}
     <hr>
     <p>{{ comment.user }} ({{ comment.post_date }})- {{ comment }}</p>
@@ -14,5 +15,6 @@
   {% empty %}
     <p>There are no comments.</p> 
   {% endfor %}
+  <a href="{% url 'add_comment_to_post' pk=blogpost.pk %}">Add a new comment</a>
 
 {% endblock %}

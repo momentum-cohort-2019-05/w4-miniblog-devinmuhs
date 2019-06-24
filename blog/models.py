@@ -49,9 +49,15 @@ class Comment(models.Model):
     post_date = models.DateTimeField(auto_now_add=True)
     target_blog_post = models.ForeignKey('BlogPost', on_delete=models.CASCADE, null=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, on_delete=models.CASCADE)
+    approved_comment = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['-post_date']
+
+    def approve(self):
+        self.approved_comment = True
+        self.save()
+
 
     def __str__(self):
         """String for representing the Model object."""
